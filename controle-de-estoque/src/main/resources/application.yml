@@ -1,0 +1,12 @@
+server:
+  port: '9004'
+spring:
+  application:
+    name: controle-de-estoque
+eureka:
+  client:
+    service-url:
+      defaultZone: 'http://host.docker.internal:9090/eureka'
+  instance:
+    instance-id: '${spring.application.name}:${random.int}'
+    prefer-ip-address: true
