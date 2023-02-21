@@ -9,14 +9,14 @@ services:
   controle-de-estoque:
     image: controle-de-estoque
     ports:
-      - "9000:9000"
+      - "9004:9004"
     depends_on:
       - server
     container_name: controle-de-estoque-0
   controle-de-pedidos:
     image: controle-de-pedidos
     ports:
-      - "9000:9000"
+      - "9003:9003"
     depends_on:
       - server
       - controle-de-estoque
@@ -24,14 +24,14 @@ services:
   processador-de-pagamentos:
     image: processador-de-pagamentos
     ports:
-      - "9000:9000"
+      - "9006:9006"
     depends_on:
       - server
     container_name: processador-de-pagamentos-0
   notificador:
     image: notificador
     ports:
-      - "9000:9000"
+      - "9005:9005"
     depends_on:
       - server
     container_name: notificador-0
