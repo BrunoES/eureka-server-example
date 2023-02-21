@@ -1,0 +1,37 @@
+version: "2"
+
+services:
+  eureka-server:
+    image: eureka-server
+    ports:
+      - "9090:9090"
+    container_name: eureka-server-0
+  controle-de-estoque:
+    image: controle-de-estoque
+    ports:
+      - "9000:9000"
+    depends_on:
+      - eureka-server
+    container_name: controle-de-estoque-0
+  controle-de-pedidos:
+    image: controle-de-pedidos
+    ports:
+      - "9000:9000"
+    depends_on:
+      - eureka-server
+      - controle-de-estoque
+    container_name: controle-de-pedidos-0
+  processador-de-pagamentos:
+    image: processador-de-pagamentos
+    ports:
+      - "9000:9000"
+    depends_on:
+      - eureka-server
+    container_name: processador-de-pagamentos-0
+  notificador:
+    image: notificador
+    ports:
+      - "9000:9000"
+    depends_on:
+      - eureka-server
+    container_name: notificador-0
