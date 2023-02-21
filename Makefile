@@ -4,8 +4,6 @@ build:
 	cd ./controle-de-pedidos && mvn clean install -DskipTests
 	cd ./processador-de-pagamentos && mvn clean install -DskipTests
 	cd ./notificador && mvn clean install -DskipTests
-
-image:
 	docker image rm server
 	docker image rm controle-de-estoque
 	docker image rm controle-de-pedidos
@@ -16,3 +14,4 @@ image:
 	docker build -t controle-de-pedidos ./controle-de-pedidos
 	docker build -t processador-de-pagamentos ./processador-de-pagamentos
 	docker build -t notificador ./notificador
+	docker compose up > application.log
