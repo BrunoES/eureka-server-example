@@ -6,7 +6,6 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: 'http://host.docker.internal:9090/eureka'
+      defaultZone: 'http://server:9090/eureka'
   instance:
     instance-id: '${spring.application.name}:${random.int}'
-    prefer-ip-address: true
