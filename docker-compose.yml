@@ -5,33 +5,42 @@ services:
     image: server
     ports:
       - "9090:9090"
-    container_name: server-0
+    container_name: server
+    healthcheck:
+      test: curl --fail http://localhost:9090 || exit 1
+      interval: 30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
   controle-de-estoque:
     image: controle-de-estoque
     ports:
       - "9004:9004"
     depends_on:
-      - server
+      server:
+        condition: service_healthy
     container_name: controle-de-estoque-0
   controle-de-pedidos:
     image: controle-de-pedidos
     ports:
       - "9003:9003"
     depends_on:
-      - server
-      - controle-de-estoque
+      server:
+        condition: service_healthy
     container_name: controle-de-pedidos-0
   processador-de-pagamentos:
     image: processador-de-pagamentos
     ports:
       - "9006:9006"
     depends_on:
-      - server
+      server:
+        condition: service_healthy
     container_name: processador-de-pagamentos-0
   notificador:
     image: notificador
     ports:
       - "9005:9005"
     depends_on:
-      - server
+      server:
+        condition: service_healthy
     container_name: notificador-0
